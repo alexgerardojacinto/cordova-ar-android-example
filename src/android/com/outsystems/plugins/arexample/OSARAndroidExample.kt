@@ -7,13 +7,13 @@ import org.json.JSONArray
 
 class OSARAndroidExample {
 
-    override var callbackContext: CallbackContext? = null
+    var callbackContext: CallbackContext? = null
 
-    override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
-        super.initialize(cordova, webView)
+    fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
+        //super.initialize(cordova, webView)
     }
 
-    override fun execute(
+    fun execute(
         action: String,
         args: JSONArray,
         callbackContext: CallbackContext

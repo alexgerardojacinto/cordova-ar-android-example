@@ -3,10 +3,17 @@
   <name>OSARAndroidExample</name>
   <description>OutSystems Template for Cordova Plugin</description>
   <author>OutSystems Inc</author>
+  
   <js-module name="OSARAndroidExample" src="www/OSARAndroidExample.js">
     <clobbers target="cordova.plugins.OSARAndroidExample"/>
   </js-module>
+
   <platform name="android">
+
+    <preference name="GradlePluginKotlinEnabled" value="true" />
+    <preference name="GradlePluginKotlinCodeStyle" value="official" />
+    <preference name="AndroidXEnabled" value="true"/>
+
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="OSARAndroidExample">
         <param name="android-package" value="com.outsystems.plugins.arexample.OSARAndroidExample"/>
@@ -14,5 +21,7 @@
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/OSARAndroidExample.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/arexample"/>
+  
   </platform>
+
 </plugin>
