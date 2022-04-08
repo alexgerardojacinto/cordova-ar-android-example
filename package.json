@@ -1,0 +1,16 @@
+{
+  "name": "com.outsystems.plugins.arexample",
+  "version": "0.0.1",
+  "description": "OutSystems Template for Cordova Plugin",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "cordova": {
+    "id": "com.outsystems.plugins.arexample",
+    "platforms": [
+      "android"
+    ]
+  },
+  "engines": []
+}

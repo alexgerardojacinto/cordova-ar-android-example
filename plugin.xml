@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<plugin id="com.outsystems.plugins.arexample" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>OSARAndroidExample</name>
+  <description>OutSystems Template for Cordova Plugin</description>
+  <author>OutSystems Inc</author>
+  <js-module name="OSARAndroidExample" src="www/OSARAndroidExample.js">
+    <clobbers target="cordova.plugins.OSARAndroidExample"/>
+  </js-module>
+  <platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="OSARAndroidExample">
+        <param name="android-package" value="com.outsystems.plugins.arexample.OSARAndroidExample"/>
+      </feature>
+    </config-file>
+    <config-file parent="/*" target="AndroidManifest.xml"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/OSARAndroidExample.kt" target-dir="src/com/outsystems/plugins/arexample"/>
+  </platform>
+</plugin>
