@@ -1,19 +1,25 @@
 package com.outsystems.plugins.arexample
 
+import android.content.Intent
+import examples.kotlin.helloar.HelloArActivity
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
 import org.json.JSONArray
 
-class OSARAndroidExample {
+class OSARAndroidExample : CordovaImplementation(){
 
-    var callbackContext: CallbackContext? = null
+    override var callbackContext: CallbackContext? = null
 
-    fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
-        //super.initialize(cordova, webView)
+    override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
+        super.initialize(cordova, webView)
     }
 
-    fun execute(
+    override fun areGooglePlayServicesAvailable(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun execute(
         action: String,
         args: JSONArray,
         callbackContext: CallbackContext
@@ -30,6 +36,11 @@ class OSARAndroidExample {
 
     private fun doOpenAR(args: JSONArray) {
         //TODO
+
+        val intent = Intent(cordova.activity, HelloArActivity::class.java)
+
+        cordova.activity.startActivityForResult(intent, 1)
+
     }
 
 }
