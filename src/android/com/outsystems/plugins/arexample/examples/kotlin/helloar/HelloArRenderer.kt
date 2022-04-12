@@ -205,7 +205,7 @@ class HelloArRenderer(val activity: HelloArActivity) :
       virtualObjectAlbedoTexture =
         Texture.createFromAsset(
           render,
-          "models/pawn_albedo.png",
+          "www/pawn_albedo.png",
           Texture.WrapMode.CLAMP_TO_EDGE,
           Texture.ColorFormat.SRGB
         )
@@ -213,7 +213,7 @@ class HelloArRenderer(val activity: HelloArActivity) :
       virtualObjectAlbedoInstantPlacementTexture =
         Texture.createFromAsset(
           render,
-          "models/pawn_albedo_instant_placement.png",
+          "www/pawn_albedo_instant_placement.png",
           Texture.WrapMode.CLAMP_TO_EDGE,
           Texture.ColorFormat.SRGB
         )
@@ -221,7 +221,7 @@ class HelloArRenderer(val activity: HelloArActivity) :
       val virtualObjectPbrTexture =
         Texture.createFromAsset(
           render,
-          "models/pawn_roughness_metallic_ao.png",
+          "www/pawn_roughness_metallic_ao.png",
           Texture.WrapMode.CLAMP_TO_EDGE,
           Texture.ColorFormat.LINEAR
         )
