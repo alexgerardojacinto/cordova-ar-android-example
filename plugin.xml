@@ -91,7 +91,7 @@
     <source-file src="src/android/com/outsystems/plugins/arexample/examples/kotlin/helloar/HelloArView.kt" target-dir="app/src/main/kotlin/examples/kotlin/helloar"/>
 
     <!--assets-->
-    <source-file src="src/android/com/outsystems/plugins/arexample/models/trigrid.png" target-dir="app/assets/models"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/models/trigrid.png" target-dir="assets/models"/>
 
     <!--Gradle dependencies as frameworks-->
     <framework src="com.google.ar:core:1.30.0" />
