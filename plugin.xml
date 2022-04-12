@@ -91,7 +91,29 @@
     <source-file src="src/android/com/outsystems/plugins/arexample/examples/kotlin/helloar/HelloArView.kt" target-dir="app/src/main/kotlin/examples/kotlin/helloar"/>
 
     <!--assets-->
-    <source-file src="src/android/com/outsystems/plugins/arexample/models/trigrid.png" target-dir="assets/models"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/models/trigrid.png" target-dir="assets/models"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/models/dfg.raw" target-dir="assets/models"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_camera.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_camera.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_depth_color_visualization" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_depth_color_visualization.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/cubemap_filter.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/cubemap_filter.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/environmental_hdr.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/environmental_hdr.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/occlusion.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/occlusion.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/plane.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/plane.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/point_cloud.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/point_cloud.vert" target-dir="assets/shaders"/>
+
+    <!--res-->
+    <source-file src="src/android/com/outsystems/plugins/arexample/res/drawable/ic_launcher.png" target-dir="res/drawable"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/res/drawable/ic_settings.png" target-dir="res/drawable"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/res/strings/strings.xml" target-dir="res/xml"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/res/menu/settings_menu.xml" target-dir="res/menu"/>
+
 
     <!--Gradle dependencies as frameworks-->
     <framework src="com.google.ar:core:1.30.0" />
