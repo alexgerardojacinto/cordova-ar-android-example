@@ -95,7 +95,7 @@
     <source-file src="src/android/com/outsystems/plugins/arexample/assets/models/dfg.raw" target-dir="assets/models"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_camera.frag" target-dir="assets/shaders"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_camera.vert" target-dir="assets/shaders"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_depth_color_visualization" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_depth_color_visualization.frag" target-dir="assets/shaders"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_depth_color_visualization.vert" target-dir="assets/shaders"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/cubemap_filter.frag" target-dir="assets/shaders"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/cubemap_filter.vert" target-dir="assets/shaders"/>
