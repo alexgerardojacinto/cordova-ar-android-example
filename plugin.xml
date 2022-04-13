@@ -37,8 +37,8 @@
     <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
 
     <config-file parent="/*" target="config.xml">
-      <feature name="OSSocialLogins">
-        <param name="ios-package" value="OSSocialLogins"/>
+      <feature name="OSARAndroidExample">
+        <param name="ios-package" value="OSARAndroidExample"/>
       </feature>
       <preference name="deployment-target" value="13" />
       <preference name="UseSwiftLanguageVersion" value="5" />
