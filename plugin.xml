@@ -28,17 +28,47 @@
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml"/>
 
+    <config-file parent="/manifest" target="AndroidManifest.xml">
+      
+      <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
+      <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
+    </config-file>
 
     <config-file parent="/manifest/application" target="AndroidManifest.xml">
       
       <activity
-            android:name="com.google.ar.core.examples.java.helloar.ArTradeActivity"
-            android:label="@string/app_name"
+            android:name="examples.kotlin.helloar.HelloArActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="locked">
         </activity>
+
+        <!-- Indicates whether "Google Play Services for AR" (ARCore) is "required" or "optional". -->
+        <meta-data android:name="com.google.ar.core" android:value="required" />
+
+    </config-file>
+
+    <config-file parent="/resources" target="res/values/strings.xml">
+
+      <string translatable="false" name="depth_use_explanation">When Depth is enabled on supported devices, virtual objects adapt to the environment by blending in with the real world.</string>
+      <string translatable="false" name="button_text_enable_depth">Enable</string>
+      <string translatable="false" name="button_text_disable_depth">Disable</string>
+      <string translatable="false" name="options_title_with_depth">Your device supports depth</string>
+      <string translatable="false" name="options_title_without_depth">Your device does not support depth</string>
+      <string translatable="false" name="done">Done</string>
+      <string-array translatable="false" name="depth_options_array">
+        <item>Enable depth</item>
+        <item>Show depth map</item>
+      </string-array>
+      <string translatable="false" name="options_title_instant_placement">Instant Placement options</string>
+      <string-array translatable="false" name="instant_placement_options_array">
+        <item>Enable Instant Placement</item>
+      </string-array>
+
+      <string translatable="false" name="searching_planes">Searching for surfaces...</string>
+      <string translatable="false" name="waiting_taps">Tap on a surface to place an object.</string>
 
     </config-file>
 
@@ -49,48 +79,69 @@
 
     <!--Google AR Example files-->
     <!--Java files-->
-    <source-file src="src/android/com/outsystems/plugins/arexample/ArTradeActivity.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/CameraPermissionHelper.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/DisplayRotationHelper.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/package-info.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar"/>
-    
+    <!--../helpers-->
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/helpers/CameraPermissionHelper.java" target-dir="app/src/main/kotlin/examples/java/common/helpers"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/helpers/DepthSettings.java" target-dir="app/src/main/kotlin/examples/java/common/helpers"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/helpers/DisplayRotationHelper.java" target-dir="app/src/main/kotlin/examples/java/common/helpers"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/helpers/FullScreenHelper.java" target-dir="app/src/main/kotlin/examples/java/common/helpers"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/helpers/InstantPlacementSettings.java" target-dir="app/src/main/kotlin/examples/java/common/helpers"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/helpers/SnackbarHelper.java" target-dir="app/src/main/kotlin/examples/java/common/helpers"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/helpers/TapHelper.java" target-dir="app/src/main/kotlin/examples/java/common/helpers"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/helpers/TrackingStateHelper.java" target-dir="app/src/main/kotlin/examples/java/common/helpers"/>
+    <!--../samplerender-->
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/arcore/BackgroundRenderer.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender/arcore"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/arcore/PlaneRenderer.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender/arcore"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/arcore/SpecularCubemapFilter.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender/arcore"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/Framebuffer.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/GLError.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/GpuBuffer.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/IndexBuffer.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/Mesh.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/SampleRender.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/Shader.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/Texture.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/java/common/samplerender/VertexBuffer.java" target-dir="app/src/main/kotlin/examples/java/common/samplerender"/>
 
-    <!--Rendering-->
-    <source-file src="src/android/com/outsystems/plugins/arexample/rendering/BackgroundRenderer.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar/rendering"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/rendering/ObjectRenderer.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar/rendering"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/rendering/package-info.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar/rendering"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/rendering/PlaneRenderer.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar/rendering"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/rendering/PointCloudRenderer.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar/rendering"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/rendering/ShaderUtil.java" target-dir="app/src/main/kotlin/com/google/ar/core/examples/java/helloar/rendering"/>
+    <!--Kotlin files-->
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/kotlin/common/helpers/ARCoreSessionLifecycleHelper.kt" target-dir="app/src/main/kotlin/examples/kotlin/common/helpers"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/kotlin/helloar/HelloArActivity.kt" target-dir="app/src/main/kotlin/examples/kotlin/helloar"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/kotlin/helloar/HelloArRenderer.kt" target-dir="app/src/main/kotlin/examples/kotlin/helloar"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/examples/kotlin/helloar/HelloArView.kt" target-dir="app/src/main/kotlin/examples/kotlin/helloar"/>
 
     <!--assets-->
-    <source-file src="src/android/com/outsystems/plugins/arexample/assets/trigrid.png" target-dir="assets"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/models/trigrid.png" target-dir="assets/models"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/models/dfg.raw" target-dir="assets/models"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_camera.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_camera.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_depth_color_visualization.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/background_show_depth_color_visualization.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/cubemap_filter.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/cubemap_filter.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/environmental_hdr.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/environmental_hdr.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/occlusion.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/occlusion.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/plane.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/plane.vert" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/point_cloud.frag" target-dir="assets/shaders"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/assets/shaders/point_cloud.vert" target-dir="assets/shaders"/>
 
     <!--res-->
     <source-file src="src/android/com/outsystems/plugins/arexample/res/drawable/ic_launcher.png" target-dir="res/drawable"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/res/drawable/ic_settings.png" target-dir="res/drawable"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/res/menu/settings_menu.xml" target-dir="res/menu"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/res/layout/activity_main.xml" target-dir="res/layout"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/res/raw/object_fragment.shader" target-dir="res/raw"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/res/raw/object_vertex.shader" target-dir="res/raw"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/res/raw/passthrough_fragment.shader" target-dir="res/raw"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/res/raw/plane_fragment.shader" target-dir="res/raw"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/res/raw/plane_vertex.shader" target-dir="res/raw"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/res/raw/point_cloud_vertex.shader" target-dir="res/raw"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/res/raw/screenquad_fragment_oes.shader" target-dir="res/raw"/>
-    <source-file src="src/android/com/outsystems/plugins/arexample/res/raw/screenquad_vertex.shader" target-dir="res/raw"/>
 
 
     <!--Gradle dependencies as frameworks-->
-    <framework src="com.google.ar:core:0.91.0" />
+    <framework src="com.google.ar:core:1.30.0" />
     <framework src="de.javagl:obj:0.2.1" />
     <framework src="androidx.appcompat:appcompat:1.1.0" />
-    <framework src="com.android.support:design:27.0.2" />
     <framework src="androidx.lifecycle:lifecycle-common-java8:2.2.0" />
     <framework src="com.google.android.material:material:1.1.0" />
     <framework src="org.jetbrains.kotlin:kotlin-stdlib:1.4.20" />
     <framework src="org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.20" />
 
-    <!--we may need to include this one-->
-    <!--implementation 'com.android.support:appcompat-v7:27.0.2'-->
 
   </platform>
 
