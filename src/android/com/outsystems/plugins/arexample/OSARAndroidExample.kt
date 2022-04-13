@@ -1,7 +1,7 @@
 package com.outsystems.plugins.arexample
 
 import android.content.Intent
-import examples.kotlin.helloar.HelloArActivity
+import com.google.ar.core.examples.java.helloar.ArTradeActivity
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
@@ -37,7 +37,7 @@ class OSARAndroidExample : CordovaImplementation(){
     private fun doOpenAR(args: JSONArray) {
         //TODO
 
-        val intent = Intent(cordova.activity, HelloArActivity::class.java)
+        val intent = Intent(cordova.activity, ArTradeActivity::class.java)
 
         cordova.activity.startActivityForResult(intent, 1)
 
