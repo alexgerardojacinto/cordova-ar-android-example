@@ -201,6 +201,8 @@ class HelloArRenderer(val activity: HelloArActivity) :
       pointCloudMesh =
         Mesh(render, Mesh.PrimitiveMode.POINTS, /*indexBuffer=*/ null, pointCloudVertexBuffers)
 
+
+      /*
       // Virtual object to render (ARCore pawn)
       virtualObjectAlbedoTexture =
         Texture.createFromAsset(
@@ -225,7 +227,19 @@ class HelloArRenderer(val activity: HelloArActivity) :
           Texture.WrapMode.CLAMP_TO_EDGE,
           Texture.ColorFormat.LINEAR
         )
-      virtualObjectMesh = Mesh.createFromAsset(render, "www/pawn.obj")
+
+        */
+
+      virtualObjectAlbedoTexture =
+        Texture.createFromAsset(
+          render,
+          "www/bear.jpeg",
+          Texture.WrapMode.CLAMP_TO_EDGE,
+          Texture.ColorFormat.LINEAR
+        )
+
+
+      virtualObjectMesh = Mesh.createFromAsset(render, "www/teddyBear.obj")
       virtualObjectShader =
         Shader.createFromAssets(
             render,
@@ -234,8 +248,8 @@ class HelloArRenderer(val activity: HelloArActivity) :
             mapOf("NUMBER_OF_MIPMAP_LEVELS" to cubemapFilter.numberOfMipmapLevels.toString())
           )
           .setTexture("u_AlbedoTexture", virtualObjectAlbedoTexture)
-          .setTexture("u_RoughnessMetallicAmbientOcclusionTexture", virtualObjectPbrTexture)
-          .setTexture("u_Cubemap", cubemapFilter.filteredCubemapTexture)
+          //.setTexture("u_RoughnessMetallicAmbientOcclusionTexture", virtualObjectPbrTexture)
+          //.setTexture("u_Cubemap", cubemapFilter.filteredCubemapTexture)
           .setTexture("u_DfgTexture", dfgTexture)
     } catch (e: IOException) {
       Log.e(TAG, "Failed to read a required asset file", e)
@@ -396,7 +410,8 @@ class HelloArRenderer(val activity: HelloArActivity) :
         if ((trackable as? InstantPlacementPoint)?.trackingMethod ==
             InstantPlacementPoint.TrackingMethod.SCREENSPACE_WITH_APPROXIMATE_DISTANCE
         ) {
-          virtualObjectAlbedoInstantPlacementTexture
+          //virtualObjectAlbedoInstantPlacementTexture
+          virtualObjectAlbedoTexture
         } else {
           virtualObjectAlbedoTexture
         }
