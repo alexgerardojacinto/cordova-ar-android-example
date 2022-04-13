@@ -28,13 +28,6 @@
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml"/>
 
-    <config-file parent="/manifest" target="AndroidManifest.xml">
-      
-      <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
-      <uses-feature android:glEsVersion="0x00020000" android:required="true" />
-
-    </config-file>
-
 
     <config-file parent="/manifest/application" target="AndroidManifest.xml">
       
@@ -46,8 +39,6 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="locked">
         </activity>
-
-      <meta-data android:name="com.google.ar.core" android:value="required" />
 
     </config-file>
 
@@ -91,8 +82,12 @@
     <!--Gradle dependencies as frameworks-->
     <framework src="com.google.ar:core:0.91.0" />
     <framework src="de.javagl:obj:0.2.1" />
-    <framework src="com.android.support:appcompat-v7:27.0.2" />
+    <framework src="androidx.appcompat:appcompat:1.1.0" />
     <framework src="com.android.support:design:27.0.2" />
+    <framework src="androidx.lifecycle:lifecycle-common-java8:2.2.0" />
+    <framework src="com.google.android.material:material:1.1.0" />
+    <framework src="org.jetbrains.kotlin:kotlin-stdlib:1.4.20" />
+    <framework src="org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.20" />
 
     <!--we may need to include this one-->
     <!--implementation 'com.android.support:appcompat-v7:27.0.2'-->
