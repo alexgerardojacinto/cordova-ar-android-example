@@ -233,13 +233,13 @@ class HelloArRenderer(val activity: HelloArActivity) :
       virtualObjectAlbedoTexture =
         Texture.createFromAsset(
           render,
-          "www/bear.jpeg",
+          "www/texture.png",
           Texture.WrapMode.CLAMP_TO_EDGE,
           Texture.ColorFormat.LINEAR
         )
 
 
-      virtualObjectMesh = Mesh.createFromAsset(render, "www/teddyBear2.obj")
+      virtualObjectMesh = Mesh.createFromAsset(render, "www/object.obj")
       virtualObjectShader =
         Shader.createFromAssets(
             render,
