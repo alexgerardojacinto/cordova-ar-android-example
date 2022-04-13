@@ -47,6 +47,7 @@
 		<!-- iOS Source Files -->
 		<source-file src="src/ios/CordovaImplementation.swift" />
     <source-file src="src/ios/OSARAndroidExample.swift" />
+    <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
     
   </platform>
 
