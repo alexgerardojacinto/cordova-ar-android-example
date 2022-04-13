@@ -239,7 +239,7 @@ class HelloArRenderer(val activity: HelloArActivity) :
         )
 
 
-      virtualObjectMesh = Mesh.createFromAsset(render, "www/teddyBear.obj")
+      virtualObjectMesh = Mesh.createFromAsset(render, "www/teddyBear2.obj")
       virtualObjectShader =
         Shader.createFromAssets(
             render,
