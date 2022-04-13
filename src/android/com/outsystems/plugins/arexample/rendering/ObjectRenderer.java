@@ -20,8 +20,7 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;
-import com.outsystemsenterprise.enmobile11dev.ARAndroidExample.R;
-
+import com.google.ar.core.examples.java.helloar.R;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjData;
 import de.javagl.obj.ObjReader;

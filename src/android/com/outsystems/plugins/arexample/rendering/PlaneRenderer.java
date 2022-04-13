@@ -26,8 +26,7 @@ import com.google.ar.core.Camera;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Pose;
 import com.google.ar.core.Trackable.TrackingState;
-import com.outsystemsenterprise.enmobile11dev.ARAndroidExample.R;
-
+import com.google.ar.core.examples.java.helloar.R;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

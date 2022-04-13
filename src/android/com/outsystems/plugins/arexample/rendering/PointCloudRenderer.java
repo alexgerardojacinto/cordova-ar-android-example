@@ -19,8 +19,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import com.google.ar.core.PointCloud;
-import com.outsystemsenterprise.enmobile11dev.ARAndroidExample.R;
-
+import com.google.ar.core.examples.java.helloar.R;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
