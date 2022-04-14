@@ -41,6 +41,7 @@ class OSARAndroidExample : CordovaImplementation(){
 
         cordova.activity.startActivityForResult(intent, 1)
 
+        
     }
 
 }
