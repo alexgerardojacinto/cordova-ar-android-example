@@ -52,7 +52,7 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
 //        closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         self.view.addSubview(closeButton)
         
-        closeButton.topAnchor.constraint(equalTo: sceneView.topAnchor, constant: 20).isActive = true
+        closeButton.topAnchor.constraint(equalTo: sceneView.topAnchor, constant: 30).isActive = true
         closeButton.centerXAnchor.constraint(equalTo: sceneView.centerXAnchor).isActive = true
         
         // Gestures
