@@ -19,11 +19,9 @@ class OSARAndroidExample : CordovaImplementation(){
         TODO("Not yet implemented")
     }
 
-    override fun execute(
-        action: String,
-        args: JSONArray,
-        callbackContext: CallbackContext
-    ): Boolean {
+    override fun execute(action: String,
+                         args: JSONArray,
+                         callbackContext: CallbackContext): Boolean {
         this.callbackContext = callbackContext
 
         when (action) {
@@ -35,13 +33,10 @@ class OSARAndroidExample : CordovaImplementation(){
     }
 
     private fun doOpenAR(args: JSONArray) {
-        //TODO
-
         val intent = Intent(cordova.activity, HelloArActivity::class.java)
+        intent.putExtra("ObjectName", "chair")
 
-        cordova.activity.startActivityForResult(intent, 1)
-
-        
+        cordova.activity.startActivity(intent)
     }
 
 }

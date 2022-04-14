@@ -47,8 +47,10 @@ import java.io.IOException
 import java.nio.ByteBuffer
 
 /** Renders the HelloAR application using our example Renderer. */
-class HelloArRenderer(val activity: HelloArActivity) :
-  SampleRender.Renderer, DefaultLifecycleObserver {
+class HelloArRenderer(val activity: HelloArActivity,
+                      private val meshFile: String,
+                      private val textureFile: String) : SampleRender.Renderer, DefaultLifecycleObserver {
+
   companion object {
     val TAG = "HelloArRenderer"
 
@@ -233,13 +235,13 @@ class HelloArRenderer(val activity: HelloArActivity) :
       virtualObjectAlbedoTexture =
         Texture.createFromAsset(
           render,
-          "www/texture.png",
+          textureFile,
           Texture.WrapMode.CLAMP_TO_EDGE,
           Texture.ColorFormat.LINEAR
         )
 
 
-      virtualObjectMesh = Mesh.createFromAsset(render, "www/object.obj")
+      virtualObjectMesh = Mesh.createFromAsset(render, meshFile)
       virtualObjectShader =
         Shader.createFromAssets(
             render,

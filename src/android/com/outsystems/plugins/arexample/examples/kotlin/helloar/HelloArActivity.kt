@@ -43,8 +43,17 @@ import examples.java.common.samplerender.SampleRender
  * plane to place a 3D model.
  */
 class HelloArActivity : AppCompatActivity() {
+
+
   companion object {
     private const val TAG = "HelloArActivity"
+
+    private const val CHAIR_MESH_NAME = "www/chair/chair.obj"
+    private const val CHAIR_TEXTURE_NAME = "www/chair/chair.jpg"
+
+    private const val BEER_MESH_NAME = "www/beer/beer.obj"
+    private const val BEER_TEXTURE_NAME = "www/beer/beer.jpg"
+
   }
 
   lateinit var arCoreSessionHelper: ARCoreSessionLifecycleHelper
@@ -82,7 +91,7 @@ class HelloArActivity : AppCompatActivity() {
     lifecycle.addObserver(arCoreSessionHelper)
 
     // Set up the Hello AR renderer.
-    renderer = HelloArRenderer(this)
+    renderer = HelloArRenderer(this, CHAIR_MESH_NAME, CHAIR_TEXTURE_NAME)
     lifecycle.addObserver(renderer)
 
     // Set up Hello AR UI.
