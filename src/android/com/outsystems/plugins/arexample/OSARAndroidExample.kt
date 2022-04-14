@@ -34,8 +34,7 @@ class OSARAndroidExample : CordovaImplementation(){
 
     private fun doOpenAR(args: JSONArray) {
         val intent = Intent(cordova.activity, HelloArActivity::class.java)
-        intent.putExtra("ObjectName", "chair")
-
+        intent.putExtra(HelloArActivity.OBJECT_NAME_EXTRA, args.getString(0))
         cordova.activity.startActivity(intent)
     }
 

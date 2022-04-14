@@ -48,11 +48,15 @@ class HelloArActivity : AppCompatActivity() {
   companion object {
     private const val TAG = "HelloArActivity"
 
+    const val OBJECT_NAME_EXTRA = "object-name"
+    private const val BEER_OBJECT_EXTRA = "beer"
+    private const val CHAIR_OBJECT_EXTRA = "chair"
+
     private const val CHAIR_MESH_NAME = "www/chair/chair.obj"
     private const val CHAIR_TEXTURE_NAME = "www/chair/chair.jpg"
 
     private const val BEER_MESH_NAME = "www/beer/beer.obj"
-    private const val BEER_TEXTURE_NAME = "www/beer/beer.jpg"
+    private const val BEER_TEXTURE_NAME = "www/beer/beer.png"
 
   }
 
@@ -90,8 +94,13 @@ class HelloArActivity : AppCompatActivity() {
     arCoreSessionHelper.beforeSessionResume = ::configureSession
     lifecycle.addObserver(arCoreSessionHelper)
 
+    val objectName = intent.extras?.getString(OBJECT_NAME_EXTRA)
+    renderer = when(objectName) {
+      CHAIR_OBJECT_EXTRA -> HelloArRenderer(this, CHAIR_MESH_NAME, CHAIR_TEXTURE_NAME)
+      else -> HelloArRenderer(this, BEER_MESH_NAME, BEER_TEXTURE_NAME)
+    }
+
     // Set up the Hello AR renderer.
-    renderer = HelloArRenderer(this, CHAIR_MESH_NAME, CHAIR_TEXTURE_NAME)
     lifecycle.addObserver(renderer)
 
     // Set up Hello AR UI.

@@ -203,7 +203,6 @@ class HelloArRenderer(val activity: HelloArActivity,
       pointCloudMesh =
         Mesh(render, Mesh.PrimitiveMode.POINTS, /*indexBuffer=*/ null, pointCloudVertexBuffers)
 
-
       /*
       // Virtual object to render (ARCore pawn)
       virtualObjectAlbedoTexture =
