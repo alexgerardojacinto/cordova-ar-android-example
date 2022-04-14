@@ -5,7 +5,14 @@ import SceneKit
 @objc(OSARAndroidExample)
 class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
     var sceneView: ARSCNView!
-    var callbackId:String=""
+    var callbackId: String=""
+    var objectName: String=""
+    var nodeName: String=""
+    var materialPath: String=""
+    
+    let beerMaterial = "www/beer/beer.png"
+    let chairMaterial = "www/chair/chair.jpg"
+    
     // convenience
     private var view: UIView {
         self.viewController.view
@@ -14,6 +21,8 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
     @objc(coolMethod:)
     func coolMethod(command: CDVInvokedUrlCommand) {
         self.callbackId = command.callbackId
+        self.objectName = command.arguments[0] as? String ?? ""
+        
         sceneView = ARSCNView()
         self.view.addSubview(sceneView)
 
@@ -29,6 +38,15 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.showsStatistics = true
         
+        let closeButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.setTitle("Close Screen", for: .normal)
+        closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        self.view.addSubview(closeButton)
+        
+        closeButton.topAnchor.constraint(equalTo: sceneView.topAnchor, constant: 20).isActive = true
+        closeButton.centerXAnchor.constraint(equalTo: sceneView.centerXAnchor).isActive = true
+        
         // Gestures
         let tapGesure = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         sceneView.addGestureRecognizer(tapGesure)
@@ -42,8 +60,19 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         sceneView.session.run(configuration)
     }
     
+    @objc
+    func closeAction(sender: UIButton!) {
+        self.sendResult(result: nil, error: nil, callBackID: self.callbackId)
+        sceneView.session.pause()
+        
+        sceneView.removeFromSuperview()
+        
+        self.viewController.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Gesture Recognizers
-    @objc func handleTap(gesture: UITapGestureRecognizer) {
+    @objc
+    func handleTap(gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: sceneView)
         guard let hitTestResult = sceneView.hitTest(location, types: .existingPlane).first else { return }
         let position = SCNVector3Make(hitTestResult.worldTransform.columns.3.x,
@@ -53,18 +82,32 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
     }
     
     func addTeddyBearModelTo(position: SCNVector3) {
-        guard let teddyBearScene = SCNScene(named: "www/teddyBear.obj") else {
-            fatalError("Unable to find teddyBearScene.obj")
+        let folder = objectName + "/"
+        guard let teddyBearScene = SCNScene(named: "www/\(folder)\(objectName).obj") else {
+            fatalError("Unable to find \(objectName).obj")
         }
-        guard let baseNode = teddyBearScene.rootNode.childNode(withName: "teddy", recursively: true) else {
+        
+        if (objectName == "beer") {
+            self.nodeName = "Cylinder"
+        } else {
+            self.nodeName = "Chair"
+        }
+        
+        guard let baseNode = teddyBearScene.rootNode.childNode(withName: self.nodeName, recursively: true) else {
             fatalError("Unable to find baseNode")
         }
         baseNode.position = position
-        baseNode.scale = SCNVector3Make(0.005, 0.005, 0.005)
+//        baseNode.scale = SCNVector3Make(0.005, 0.005, 0.005)
         
         let cakeMaterial = SCNMaterial()
         cakeMaterial.lightingModel = .physicallyBased
-        cakeMaterial.diffuse.contents = UIImage(named: "www/bear.jpeg")
+        
+        if (objectName == "beer") {
+            cakeMaterial.diffuse.contents = UIImage(named: "www/beer/beer.png")
+        } else {
+            cakeMaterial.diffuse.contents = UIImage(named: "www/chair/chair.jpg")
+        }
+        
         cakeMaterial.normal.intensity = 0.5
         baseNode.geometry?.firstMaterial = cakeMaterial
         
