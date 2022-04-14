@@ -10,6 +10,14 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
     var nodeName: String=""
     var materialPath: String=""
     
+    lazy var closeButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100.00))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Close Screen", for: .normal)
+        button.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+        return button
+    }()
+    
     let beerMaterial = "www/beer/beer.png"
     let chairMaterial = "www/chair/chair.jpg"
     
@@ -38,10 +46,10 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.showsStatistics = true
         
-        let closeButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.setTitle("Close Screen", for: .normal)
-        closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+//        let closeButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+//        closeButton.translatesAutoresizingMaskIntoConstraints = false
+//        closeButton.setTitle("Close Screen", for: .normal)
+//        closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         self.view.addSubview(closeButton)
         
         closeButton.topAnchor.constraint(equalTo: sceneView.topAnchor, constant: 20).isActive = true
@@ -66,6 +74,7 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         sceneView.session.pause()
         
         sceneView.removeFromSuperview()
+        self.closeButton.removeFromSuperview()
         
         self.viewController.dismiss(animated: true, completion: nil)
     }
