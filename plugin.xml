@@ -89,7 +89,7 @@
 
 
     <!--Gradle dependencies as frameworks-->
-    <framework src="com.google.ar:core:0.91.0" />
+    <framework src="com.google.ar:core:1.30.0" />
     <framework src="de.javagl:obj:0.2.1" />
     <framework src="com.android.support:appcompat-v7:27.0.2" />
     <framework src="com.android.support:design:27.0.2" />

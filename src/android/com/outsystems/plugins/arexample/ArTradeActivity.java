@@ -24,12 +24,13 @@ import com.google.ar.core.PointCloud;
 import com.google.ar.core.Pose;
 import com.google.ar.core.Session;
 import com.google.ar.core.Trackable;
-import com.google.ar.core.Trackable.TrackingState;
+import com.google.ar.core.TrackingState;
 import com.google.ar.core.examples.java.helloar.rendering.BackgroundRenderer;
 import com.google.ar.core.examples.java.helloar.rendering.ObjectRenderer;
 import com.google.ar.core.examples.java.helloar.rendering.ObjectRenderer.BlendMode;
 import com.google.ar.core.examples.java.helloar.rendering.PlaneRenderer;
 import com.google.ar.core.examples.java.helloar.rendering.PointCloudRenderer;
+import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
@@ -147,7 +148,11 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
             if (mSession != null) {
                 showLoadingMessage();
                 // Note that order matters - see the note in onPause(), the reverse applies here.
-                mSession.resume();
+                try {
+                    mSession.resume();
+                } catch (CameraNotAvailableException e) {
+                    e.printStackTrace();
+                }
             }
             mSurfaceView.onResume();
             mDisplayRotationHelper.onResume();
@@ -171,9 +176,10 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+        //super.onRequestPermissionsResult(requestCode, permissions, results);
         if (!CameraPermissionHelper.hasCameraPermission(this)) {
             Toast.makeText(this,
-                "Camera permission is needed to run this application", Toast.LENGTH_LONG).show();
+                    "Camera permission is needed to run this application", Toast.LENGTH_LONG).show();
             if (!CameraPermissionHelper.shouldShowRequestPermissionRationale(this)) {
                 // Permission denied with checking "Do not ask again".
                 CameraPermissionHelper.launchPermissionSettings(this);
@@ -215,7 +221,7 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
 
         // Prepare the other rendering objects.
         try {
-            mVirtualObject.createOnGlThread(/*context=*/this, "teddyBear.obj", "bear.jpeg");
+            mVirtualObject.createOnGlThread(/*context=*/this, "www/beer/beer.obj", "www/beer/beer.png");
             mVirtualObject.setMaterialProperties(0.0f, 3.5f, 1.0f, 6.0f);
 
             //mVirtualObjectShadow.createOnGlThread(/*context=*/this,
@@ -353,7 +359,7 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
                 mSession.getAllTrackables(Plane.class), camera.getDisplayOrientedPose(), projmtx);
 
             // Visualize anchors created by touch.
-            float scaleFactor = 0.01f;
+            float scaleFactor = 1f;
             for (Anchor anchor : mAnchors) {
                 if (anchor.getTrackingState() != TrackingState.TRACKING) {
                     continue;
