@@ -48,7 +48,7 @@ class OSARAndroidExample : CordovaImplementation(){
         }
         else if(objToShow == "chair"){
             intent.putExtra("obj_path", "www/chair/chair.obj")
-            intent.putExtra("texture_path", "www/chair/chair.jpg")
+            intent.putExtra("texture_path", "www/chair/chair.png")
             cordova.activity.startActivityForResult(intent, 1)
         }
         else{//do nothing
