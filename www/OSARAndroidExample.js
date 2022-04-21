@@ -1,5 +1,5 @@
 var exec = require('cordova/exec');
 
-exports.coolMethod = function (arg0, success, error) {
-    exec(success, error, 'OSARAndroidExample', 'coolMethod', [arg0]);
+exports.coolMethod = function (success, error, object) {
+    exec(success, error, 'OSARAndroidExample', 'coolMethod', [object]);
 };

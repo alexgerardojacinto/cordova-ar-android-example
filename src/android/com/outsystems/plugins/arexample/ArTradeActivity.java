@@ -57,6 +57,9 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
     private GestureDetector mGestureDetector;
     private Snackbar mMessageSnackbar;
     private DisplayRotationHelper mDisplayRotationHelper;
+    
+    private String objPath = "";
+    private String texturePath = "";
 
     private final BackgroundRenderer mBackgroundRenderer = new BackgroundRenderer();
     private final ObjectRenderer mVirtualObject = new ObjectRenderer();
@@ -77,7 +80,12 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
         setContentView(R.layout.activity_main);
         mSurfaceView = findViewById(R.id.surfaceview);
         mDisplayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
-
+        
+        
+        //assign values to objPath and texturePath
+        objPath = getIntent().getStringExtra("obj_path");
+        texturePath = getIntent().getStringExtra("texture_path");
+        
         // Set up tap listener.
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -221,7 +229,7 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
 
         // Prepare the other rendering objects.
         try {
-            mVirtualObject.createOnGlThread(/*context=*/this, "www/beer/beer.obj", "www/beer/beer.png");
+            mVirtualObject.createOnGlThread(/*context=*/this, objPath, texturePath);
             mVirtualObject.setMaterialProperties(0.0f, 3.5f, 1.0f, 6.0f);
 
             //mVirtualObjectShadow.createOnGlThread(/*context=*/this,

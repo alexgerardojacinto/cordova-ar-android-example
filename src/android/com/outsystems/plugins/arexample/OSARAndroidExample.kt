@@ -39,8 +39,21 @@ class OSARAndroidExample : CordovaImplementation(){
 
         val intent = Intent(cordova.activity, ArTradeActivity::class.java)
 
-        cordova.activity.startActivityForResult(intent, 1)
+        val objToShow = args.getString(0)
 
+        if(objToShow == "beer"){
+            intent.putExtra("obj_path", "www/beer/beer.obj")
+            intent.putExtra("texture_path", "www/beer/beer.png")
+            cordova.activity.startActivityForResult(intent, 1)
+        }
+        else if(objToShow == "chair"){
+            intent.putExtra("obj_path", "www/chair/chair.obj")
+            intent.putExtra("texture_path", "www/chair/chair.jpg")
+            cordova.activity.startActivityForResult(intent, 1)
+        }
+        else{//do nothing
+            return
+        }
     }
 
 }
