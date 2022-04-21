@@ -18,9 +18,6 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         return button
     }()
     
-    let beerMaterial = "www/beer/beer.png"
-    let chairMaterial = "www/chair/chair.jpg"
-    
     // convenience
     private var view: UIView {
         self.viewController.view
@@ -99,7 +96,7 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         if (objectName == "beer") {
             self.nodeName = "Cylinder"
         } else {
-            self.nodeName = "Chair"
+            self.nodeName = "chair"
         }
         
         guard let baseNode = teddyBearScene.rootNode.childNode(withName: self.nodeName, recursively: true) else {
@@ -114,7 +111,7 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         if (objectName == "beer") {
             cakeMaterial.diffuse.contents = UIImage(named: "www/beer/beer.png")
         } else {
-            cakeMaterial.diffuse.contents = UIImage(named: "www/chair/chair.jpg")
+            cakeMaterial.diffuse.contents = UIImage(named: "www/chair/chair.png")
         }
         
         cakeMaterial.normal.intensity = 0.5
