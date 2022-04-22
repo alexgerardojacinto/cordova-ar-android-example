@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <plugin id="com.outsystems.plugins.arexample" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-  <name>OSARAndroidExample</name>
+  <name>ARPlugin</name>
   <description>OutSystems Template for Cordova Plugin</description>
   <author>OutSystems Inc</author>
 
-  <js-module name="OSARAndroidExample" src="www/OSARAndroidExample.js">
-    <clobbers target="cordova.plugins.OSARAndroidExample"/>
+  <js-module name="ARPlugin" src="www/ARPlugin.js">
+    <clobbers target="cordova.plugins.ARPlugin"/>
   </js-module>
 
   <platform name="android">
@@ -22,8 +22,8 @@
     </config-file>
 
     <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="OSARAndroidExample">
-        <param name="android-package" value="com.outsystems.plugins.arexample.OSARAndroidExample"/>
+      <feature name="ARPlugin">
+        <param name="android-package" value="com.outsystems.plugins.arexample.ARPlugin"/>
       </feature>
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml"/>
@@ -52,7 +52,7 @@
     </config-file>
 
     <!--Plugin core files-->
-    <source-file src="src/android/com/outsystems/plugins/arexample/OSARAndroidExample.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/arexample"/>
+    <source-file src="src/android/com/outsystems/plugins/arexample/ARPlugin.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/arexample"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/arexample"/>
     <source-file src="src/android/com/outsystems/plugins/arexample/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/arexample"/>
 
@@ -105,8 +105,8 @@
     <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
 
     <config-file parent="/*" target="config.xml">
-      <feature name="OSARAndroidExample">
-        <param name="ios-package" value="OSARAndroidExample"/>
+      <feature name="ARPlugin">
+        <param name="ios-package" value="ARPlugin"/>
       </feature>
       <preference name="deployment-target" value="13" />
       <preference name="UseSwiftLanguageVersion" value="5" />
@@ -114,7 +114,7 @@
 
 		<!-- iOS Source Files -->
 		<source-file src="src/ios/CordovaImplementation.swift" />
-    <source-file src="src/ios/OSARAndroidExample.swift" />
+    <source-file src="src/ios/ARPlugin.swift" />
     <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
     
   </platform>

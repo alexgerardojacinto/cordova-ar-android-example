@@ -2,11 +2,11 @@ import Foundation
 import ARKit
 import SceneKit
 
-@objc(OSARAndroidExample)
-class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
+@objc(ARPlugin)
+class ARPlugin: CordovaImplementation, ARSCNViewDelegate {
     var sceneView: ARSCNView!
     var callbackId: String=""
-    var objectName: String=""
+    var folderName: String=""
     var nodeName: String=""
     var materialPath: String=""
     
@@ -23,10 +23,10 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         self.viewController.view
     }
 
-    @objc(coolMethod:)
-    func coolMethod(command: CDVInvokedUrlCommand) {
+    @objc(openARView:)
+    func openARView(command: CDVInvokedUrlCommand) {
         self.callbackId = command.callbackId
-        self.objectName = command.arguments[0] as? String ?? ""
+        self.folderName = command.arguments[0] as? String ?? ""
         
         sceneView = ARSCNView()
         self.view.addSubview(sceneView)
@@ -43,10 +43,6 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.showsStatistics = true
         
-//        let closeButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-//        closeButton.translatesAutoresizingMaskIntoConstraints = false
-//        closeButton.setTitle("Close Screen", for: .normal)
-//        closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         self.view.addSubview(closeButton)
         
         closeButton.topAnchor.constraint(equalTo: sceneView.topAnchor, constant: 30).isActive = true
@@ -84,22 +80,19 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         let position = SCNVector3Make(hitTestResult.worldTransform.columns.3.x,
                                       hitTestResult.worldTransform.columns.3.y,
                                       hitTestResult.worldTransform.columns.3.z)
-        addTeddyBearModelTo(position: position)
+        addObjectModelTo(position: position)
     }
     
-    func addTeddyBearModelTo(position: SCNVector3) {
-        let folder = objectName + "/"
-        guard let teddyBearScene = SCNScene(named: "www/\(folder)\(objectName).obj") else {
-            fatalError("Unable to find \(objectName).obj")
+    func addObjectModelTo(position: SCNVector3) {
+        let folder = folderName + "/"
+        let folderCompletePath = "www/\(folder)mesh.obj"
+        let textureCompletePath = "www/\(folder)diffuse.png"
+        
+        guard let objectScene = SCNScene(named: folderCompletePath) else {
+            fatalError("Unable to find \(folderCompletePath)")
         }
         
-        if (objectName == "beer") {
-            self.nodeName = "Cylinder"
-        } else {
-            self.nodeName = "chair"
-        }
-        
-        guard let baseNode = teddyBearScene.rootNode.childNode(withName: self.nodeName, recursively: true) else {
+        guard let baseNode = objectScene.rootNode.childNode(withName: self.nodeName, recursively: true) else {
             fatalError("Unable to find baseNode")
         }
         baseNode.position = position
@@ -107,8 +100,9 @@ class OSARAndroidExample: CordovaImplementation, ARSCNViewDelegate {
         
         let cakeMaterial = SCNMaterial()
         cakeMaterial.lightingModel = .physicallyBased
+        cakeMaterial.diffuse.contents = UIImage(named: "www/beer/beer.png")
         
-        if (objectName == "beer") {
+        if (folderName == "beer") {
             cakeMaterial.diffuse.contents = UIImage(named: "www/beer/beer.png")
         } else {
             cakeMaterial.diffuse.contents = UIImage(named: "www/chair/chair.png")

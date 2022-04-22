@@ -7,7 +7,7 @@ import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
 import org.json.JSONArray
 
-class OSARAndroidExample : CordovaImplementation(){
+class ARPlugin: CordovaImplementation(){
 
     override var callbackContext: CallbackContext? = null
 
