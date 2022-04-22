@@ -92,21 +92,19 @@ class ARPlugin: CordovaImplementation, ARSCNViewDelegate {
             fatalError("Unable to find \(folderCompletePath)")
         }
         
-        guard let baseNode = objectScene.rootNode.childNode(withName: self.nodeName, recursively: true) else {
-            fatalError("Unable to find baseNode")
+        guard let baseNode = objectScene.rootNode.childNode(withName: "mesh", recursively: true) else {
+            let alert = UIAlertController(title: "Unable to find base node", message: "Please, rename base node mesh.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.viewController.present(alert, animated: true)
+            return
         }
+        
         baseNode.position = position
 //        baseNode.scale = SCNVector3Make(0.005, 0.005, 0.005)
         
         let cakeMaterial = SCNMaterial()
         cakeMaterial.lightingModel = .physicallyBased
-        cakeMaterial.diffuse.contents = UIImage(named: "www/beer/beer.png")
-        
-        if (folderName == "beer") {
-            cakeMaterial.diffuse.contents = UIImage(named: "www/beer/beer.png")
-        } else {
-            cakeMaterial.diffuse.contents = UIImage(named: "www/chair/chair.png")
-        }
+        cakeMaterial.diffuse.contents = UIImage(named: textureCompletePath)
         
         cakeMaterial.normal.intensity = 0.5
         baseNode.geometry?.firstMaterial = cakeMaterial
