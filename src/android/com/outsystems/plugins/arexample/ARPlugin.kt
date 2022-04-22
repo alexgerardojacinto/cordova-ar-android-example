@@ -27,7 +27,7 @@ class ARPlugin: CordovaImplementation(){
         this.callbackContext = callbackContext
 
         when (action) {
-            "coolMethod" -> {
+            "openARView" -> {
                 doOpenAR(args)
             }
         }
