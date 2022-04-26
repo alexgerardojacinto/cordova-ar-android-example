@@ -26,7 +26,6 @@ import com.google.ar.core.Camera;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Pose;
 import com.google.ar.core.TrackingState;
-import com.outsystemsenterprise.enmobile11dev.ARAndroidExample.R;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -114,12 +113,14 @@ public class PlaneRenderer {
      * @param context Needed to access shader source and texture PNG.
      * @param gridDistanceTextureName  Name of the PNG file containing the grid texture.
      */
-    public void createOnGlThread(Context context, String gridDistanceTextureName)
+    public void createOnGlThread(Context context, String gridDistanceTextureName,
+                                 int rawPlaneVertex, int rawPlaneFragment)
             throws IOException {
+
         int vertexShader = ShaderUtil.loadGLShader(TAG, context,
-                GLES20.GL_VERTEX_SHADER, R.raw.plane_vertex);
+                GLES20.GL_VERTEX_SHADER, rawPlaneVertex);
         int passthroughShader = ShaderUtil.loadGLShader(TAG, context,
-                GLES20.GL_FRAGMENT_SHADER, R.raw.plane_fragment);
+                GLES20.GL_FRAGMENT_SHADER, rawPlaneFragment);
 
         mPlaneProgram = GLES20.glCreateProgram();
         GLES20.glAttachShader(mPlaneProgram, vertexShader);

@@ -19,7 +19,6 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import com.google.ar.core.PointCloud;
-import com.outsystemsenterprise.enmobile11dev.ARAndroidExample.R;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -60,7 +59,7 @@ public class PointCloudRenderer {
      *
      * @param context Needed to access shader source.
      */
-    public void createOnGlThread(Context context) {
+    public void createOnGlThread(Context context, int rawPointCloudVertex, int rawPassthroughFragment) {
         ShaderUtil.checkGLError(TAG, "before create");
 
         int[] buffers = new int[1];
@@ -75,9 +74,9 @@ public class PointCloudRenderer {
         ShaderUtil.checkGLError(TAG, "buffer alloc");
 
         int vertexShader = ShaderUtil.loadGLShader(TAG, context,
-            GLES20.GL_VERTEX_SHADER, R.raw.point_cloud_vertex);
+                GLES20.GL_VERTEX_SHADER, rawPointCloudVertex);
         int passthroughShader = ShaderUtil.loadGLShader(TAG, context,
-            GLES20.GL_FRAGMENT_SHADER, R.raw.passthrough_fragment);
+                GLES20.GL_FRAGMENT_SHADER, rawPassthroughFragment);
 
         mProgramName = GLES20.glCreateProgram();
         GLES20.glAttachShader(mProgramName, vertexShader);

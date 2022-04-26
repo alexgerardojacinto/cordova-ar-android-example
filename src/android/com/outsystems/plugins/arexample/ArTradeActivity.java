@@ -34,7 +34,6 @@ import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
-import com.outsystemsenterprise.enmobile11dev.ARAndroidExample.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,8 +76,8 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mSurfaceView = findViewById(R.id.surfaceview);
+        setContentView(getResourceId("layout/activity_main"));
+        mSurfaceView = findViewById(getResourceId("id/surfaceview"));
         mDisplayRotationHelper = new DisplayRotationHelper(/*context=*/ this);
         
         
@@ -222,14 +221,14 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
         GLES20.glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
         // Create the texture and pass it to ARCore session to be filled during update().
-        mBackgroundRenderer.createOnGlThread(/*context=*/ this);
+        mBackgroundRenderer.createOnGlThread(/*context=*/ this, getResourceId("raw/screenquad_vertex"), getResourceId("raw/screenquad_fragment_oes"));
         if (mSession != null) {
             mSession.setCameraTextureName(mBackgroundRenderer.getTextureId());
         }
 
         // Prepare the other rendering objects.
         try {
-            mVirtualObject.createOnGlThread(/*context=*/this, objPath, texturePath);
+            mVirtualObject.createOnGlThread(/*context=*/this, objPath, texturePath, getResourceId("raw/object_vertex"), getResourceId("raw/object_fragment"));
             mVirtualObject.setMaterialProperties(0.0f, 3.5f, 1.0f, 6.0f);
 
             //mVirtualObjectShadow.createOnGlThread(/*context=*/this,
@@ -240,11 +239,11 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
             Log.e(TAG, "Failed to read obj file");
         }
         try {
-            mPlaneRenderer.createOnGlThread(/*context=*/this, "trigrid.png");
+            mPlaneRenderer.createOnGlThread(/*context=*/this, "trigrid.png", getResourceId("raw/plane_vertex"), getResourceId("raw/plane_fragment"));
         } catch (IOException e) {
             Log.e(TAG, "Failed to read plane texture");
         }
-        mPointCloud.createOnGlThread(/*context=*/this);
+        mPointCloud.createOnGlThread(/*context=*/this, getResourceId("raw/point_cloud_vertex"), getResourceId("raw/passthrough_fragment"));
     }
 
     @Override
@@ -434,5 +433,9 @@ public class ArTradeActivity extends AppCompatActivity implements GLSurfaceView.
                 mMessageSnackbar = null;
             }
         });
+    }
+
+    public int getResourceId(String typeAndName) {
+        return getApplication().getResources().getIdentifier(typeAndName, null, getApplication().getPackageName());
     }
 }

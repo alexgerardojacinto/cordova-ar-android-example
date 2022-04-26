@@ -20,7 +20,6 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import com.google.ar.core.Frame;
 import com.google.ar.core.Session;
-import com.outsystemsenterprise.enmobile11dev.ARAndroidExample.R;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -63,7 +62,7 @@ public class BackgroundRenderer {
      *
      * @param context Needed to access shader source.
      */
-    public void createOnGlThread(Context context) {
+    public void createOnGlThread(Context context, int screenQuadVertex, int screenQuadFragment) {
         // Generate the background texture.
         int[] textures = new int[1];
         GLES20.glGenTextures(1, textures, 0);
@@ -99,9 +98,9 @@ public class BackgroundRenderer {
         mQuadTexCoordTransformed = bbTexCoordsTransformed.asFloatBuffer();
 
         int vertexShader = ShaderUtil.loadGLShader(TAG, context,
-                GLES20.GL_VERTEX_SHADER, R.raw.screenquad_vertex);
+                GLES20.GL_VERTEX_SHADER, screenQuadVertex);
         int fragmentShader = ShaderUtil.loadGLShader(TAG, context,
-                GLES20.GL_FRAGMENT_SHADER, R.raw.screenquad_fragment_oes);
+                GLES20.GL_FRAGMENT_SHADER, screenQuadFragment);
 
         mQuadProgram = GLES20.glCreateProgram();
         GLES20.glAttachShader(mQuadProgram, vertexShader);

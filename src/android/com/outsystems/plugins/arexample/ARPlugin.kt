@@ -39,21 +39,17 @@ class ARPlugin: CordovaImplementation(){
 
         val intent = Intent(cordova.activity, ArTradeActivity::class.java)
 
-        val objToShow = args.getString(0)
+        val folderName = args.getString(0)
 
-        if(objToShow == "beer"){
-            intent.putExtra("obj_path", "www/beer/beer.obj")
-            intent.putExtra("texture_path", "www/beer/beer.png")
-            cordova.activity.startActivityForResult(intent, 1)
-        }
-        else if(objToShow == "chair"){
-            intent.putExtra("obj_path", "www/chair/chair.obj")
-            intent.putExtra("texture_path", "www/chair/chair.png")
-            cordova.activity.startActivityForResult(intent, 1)
-        }
-        else{//do nothing
+        if(folderName.isNullOrEmpty()){
             return
+            //later we can return an error here
         }
+
+        intent.putExtra("obj_path", "www/$folderName/mesh.obj")
+        intent.putExtra("texture_path", "www/$folderName/diffuse.png")
+
+        cordova.activity.startActivityForResult(intent, 1)
     }
 
 }

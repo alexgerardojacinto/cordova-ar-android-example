@@ -20,7 +20,6 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;
-import com.outsystemsenterprise.enmobile11dev.ARAndroidExample.R;
 
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjData;
@@ -110,8 +109,12 @@ public class ObjectRenderer {
      * @param objAssetName  Name of the OBJ file containing the model geometry.
      * @param diffuseTextureAssetName  Name of the PNG file containing the diffuse texture map.
      */
-    public void createOnGlThread(Context context, String objAssetName,
-                                 String diffuseTextureAssetName) throws IOException {
+    public void createOnGlThread(Context context,
+                                 String objAssetName,
+                                 String diffuseTextureAssetName,
+                                 int rawObjectVertex,
+                                 int rawObjectFragment
+                                 ) throws IOException {
         // Read the texture.
         Bitmap textureBitmap = BitmapFactory.decodeStream(
             context.getAssets().open(diffuseTextureAssetName));
@@ -192,9 +195,9 @@ public class ObjectRenderer {
         ShaderUtil.checkGLError(TAG, "OBJ buffer load");
 
         final int vertexShader = ShaderUtil.loadGLShader(TAG, context,
-                GLES20.GL_VERTEX_SHADER, R.raw.object_vertex);
+                GLES20.GL_VERTEX_SHADER, rawObjectVertex);
         final int fragmentShader = ShaderUtil.loadGLShader(TAG, context,
-                GLES20.GL_FRAGMENT_SHADER, R.raw.object_fragment);
+                GLES20.GL_FRAGMENT_SHADER, rawObjectFragment);
 
         mProgram = GLES20.glCreateProgram();
         GLES20.glAttachShader(mProgram, vertexShader);
