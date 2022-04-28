@@ -1,15 +1,22 @@
 package com.outsystems.plugins.arexample
 
+import android.Manifest
 import android.content.Intent
 import com.google.ar.core.examples.java.helloar.ArTradeActivity
+import com.google.ar.core.examples.java.helloar.CameraPermissionHelper
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
+import org.apache.cordova.PermissionHelper
 import org.json.JSONArray
 
 class ARPlugin: CordovaImplementation(){
 
     override var callbackContext: CallbackContext? = null
+
+    var folderName = ""
+
+    val ACCESS_CAMERA = 0
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
@@ -35,23 +42,42 @@ class ARPlugin: CordovaImplementation(){
     }
 
     private fun doOpenAR(args: JSONArray) {
-        //TODO
 
-        val intent = Intent(cordova.activity, ArTradeActivity::class.java)
-
-        val folderName = args.getString(0)
+        folderName = args.getString(0)
 
         if(folderName.isNullOrEmpty()){
             return
             //later we can return an error here
         }
 
-        intent.putExtra("obj_path", "www/$folderName/mesh.obj")
-        intent.putExtra("texture_path", "www/$folderName/diffuse.png")
-
-        cordova.activity.startActivityForResult(intent, 1)
+        PermissionHelper.requestPermission(this, ACCESS_CAMERA, Manifest.permission.CAMERA);
     }
 
+    override fun onRequestPermissionResult(
+        requestCode: Int,
+        permissions: Array<out String>?,
+        grantResults: IntArray?
+    ) {
+        super.onRequestPermissionResult(requestCode, permissions, grantResults)
+
+
+        if(requestCode == ACCESS_CAMERA){
+
+            if (!CameraPermissionHelper.hasCameraPermission(cordova.activity)) {
+                //if permission wasn't granted, end
+                return
+            }
+            else{
+                val intent = Intent(cordova.activity, ArTradeActivity::class.java)
+
+                intent.putExtra("obj_path", "www/$folderName/mesh.obj")
+                intent.putExtra("texture_path", "www/$folderName/diffuse.png")
+
+                cordova.activity.startActivityForResult(intent, 1)
+            }
+
+        }
+    }
 }
 
 
